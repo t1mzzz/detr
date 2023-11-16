@@ -68,7 +68,8 @@ class ConvertCocoPolysToMask(object):
         boxes[:, 0::2].clamp_(min=0, max=w)
         boxes[:, 1::2].clamp_(min=0, max=h)
 
-        classes = [obj["category_id"] for obj in anno]
+        classes = [int(obj["category_id"]) for obj in anno]
+        # classes = [obj["category_id"] for obj in anno]
         classes = torch.tensor(classes, dtype=torch.int64)
 
         if self.return_masks:
